@@ -15,6 +15,7 @@ def main(ns: argparse.Namespace):
     kdb_conf = {"filename": ns.input, "password": ns.password}
 
     processor = Processor(vault_settings=vault_conf, kdb_settings=kdb_conf)
+    processor.sync_from_kdb()
     processor.write_vault(base_path=ns.base)
 
 
