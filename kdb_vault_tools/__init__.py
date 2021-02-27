@@ -1,4 +1,4 @@
-from .processors import Processor
 from . import exceptions
+from .processors import Processor
 
 __all__ = ["Processor", "exceptions"]

@@ -23,7 +23,8 @@ setuptools.setup(
     description="Tools for kdb vault managing",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="",
+    license="MIT",
+    url="https://github.com/moaddib666/kdb-vault-tools",
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",

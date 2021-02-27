@@ -1,0 +1,7 @@
+[run]
+omit =
+    */tests/*
+    */setup.py
+    */build/*
+    */dist/*
+    */*.egg-info/*

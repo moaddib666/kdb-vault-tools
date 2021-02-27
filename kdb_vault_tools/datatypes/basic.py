@@ -1,6 +1,6 @@
+import dataclasses
 import json
 import os
-import dataclasses
 from typing import Optional
 
 from pykeepass.entry import Entry
@@ -15,7 +15,9 @@ class BaseGroup:
 
     @classmethod
     def from_kdb_entry(cls, entry: Group):
-        return cls(title=entry.name, path="/".join(entry.path), icon=entry.icon)
+        return cls(
+            title=entry.name, path="/".join(entry.path), icon=entry.icon
+        )
 
     def as_dict(self):
         return dataclasses.asdict(self)
@@ -53,11 +55,11 @@ class BaseEntry:
 
         for line in notes.split("\n"):
             if ":" in line:
-                k, *v = line.split(":", maxsplit=2)
+                key, *content = line.split(":", maxsplit=2)
             else:
-                k, *v = line.split(" ", maxsplit=2)
+                key, *content = line.split(" ", maxsplit=2)
 
-            meta[k] = "".join(v).strip()
+            meta[key] = "".join(content).strip()
 
         return meta
 
@@ -65,8 +67,8 @@ class BaseEntry:
     def dump_notes(meta: dict) -> str:
         notes = []
 
-        for k, v in meta.items():
-            notes.append(f"{k}: {v}")
+        for key, content in meta.items():
+            notes.append(f"{key}: {content}")
 
         return "\n".join(notes)
 
