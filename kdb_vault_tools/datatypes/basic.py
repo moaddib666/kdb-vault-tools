@@ -48,6 +48,7 @@ class BaseEntry:
 
     @staticmethod
     def parse_notes(notes: str) -> dict:
+        # TODO use template lang
         meta = {}
 
         if not notes:
@@ -75,9 +76,9 @@ class BaseEntry:
     def dump_json(self, indent=None) -> str:
         return json.dumps(self.as_dict(), indent=indent)
 
-    def as_dict(self):
+    def as_dict(self) -> dict:
         return dataclasses.asdict(self)
 
     @property
-    def group_path(self):
+    def group_path(self) -> str:
         return os.path.join(*self.path.split("/")[:-1])
