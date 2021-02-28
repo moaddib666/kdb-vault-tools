@@ -8,7 +8,8 @@ from pykeepass.group import Group
 from kdb_vault_tools.datatypes.basic import BaseEntry, BaseGroup
 from kdb_vault_tools.exceptions import EntryBuildError
 from kdb_vault_tools.processors import KDBProcessor
-from .utils import create_kdb, create_kdb_group, create_kdb_entry
+
+from .utils import create_kdb, create_kdb_entry, create_kdb_group
 
 
 class TestKDBFeature(TestCase):

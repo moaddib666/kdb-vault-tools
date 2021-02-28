@@ -1,6 +1,7 @@
 from unittest import TestCase
 
-from kdb_vault_tools.datatypes.basic import BaseGroup, BaseEntry
+from kdb_vault_tools.datatypes.basic import BaseEntry, BaseGroup
+
 from .utils import create_kdb, create_kdb_entry, create_kdb_group
 
 

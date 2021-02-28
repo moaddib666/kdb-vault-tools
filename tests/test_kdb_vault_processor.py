@@ -4,8 +4,9 @@ from unittest import TestCase
 from pykeepass import PyKeePass
 
 from kdb_vault_tools import Processor
-from kdb_vault_tools.processors import VaultProcessor, KDBProcessor
-from .utils import create_kdb, create_kdb_group, create_kdb_entry
+from kdb_vault_tools.processors import KDBProcessor, VaultProcessor
+
+from .utils import create_kdb, create_kdb_entry, create_kdb_group
 
 
 class TestKDBVaultFeature(TestCase):
