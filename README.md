@@ -21,8 +21,8 @@ def create_kdb():
     }
 
     processor = Processor(vault_settings=vault_conf, kdb_settings=kdb_conf)
-    processor.sync_from_kdb()
-    processor.write_vault(base_path="/sandbox/org/team/foo/")
+    processor.sync_from_vault()
+    processor.write_kdb()
 
 
 def fill_vault():
