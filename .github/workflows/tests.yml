@@ -1,0 +1,38 @@
+name: Contrib Repo Tests
+
+on:
+  push:
+    branches-ignore:
+    - 'release/*'
+  pull_request:
+
+jobs:
+  build:
+    env:
+      py35: 3.5
+      py36: 3.6
+      py37: 3.7
+      py38: 3.8
+      package: kdb_vault_tools
+      runtime-label: ${{ matrix.python-version }}-${{ matrix.package }}-${{ matrix.os }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: [ py35, py36, py37, py38 ,py39 ]
+    steps:
+      - name: Checkout Contrib Repo @ SHA - ${{ github.sha }}
+        uses: actions/checkout@v2
+      - name: Set up Python ${{ env[matrix.python-version] }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ env[matrix.python-version] }}
+      - name: Installing tox
+        run: pip install -U tox
+      - name: Create tox cache
+        uses: actions/cache@v2
+        with:
+          path: .tox
+          key: tox-cache-${{ env.runtime-label }}-${{ hashFiles('tox.ini') }}
+      - name: run tox
+        run: tox
