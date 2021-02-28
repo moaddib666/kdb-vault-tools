@@ -14,7 +14,7 @@ requirements = read_req('requirements.txt')
 
 setuptools.setup(
     name="kdb-vault-tools",
-    version="0.1.5",
+    version="0.1.6",
     packages=setuptools.find_packages(),
     include_package_data=True,
     install_requires=requirements,
