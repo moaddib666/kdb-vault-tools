@@ -1,5 +1,7 @@
 # KDB to Vault Tools
 
+[![codecov](https://codecov.io/gh/moaddib666/kdb-vault-tools/branch/master/graph/badge.svg?token=2P8a1JEjSn)](https://codecov.io/gh/moaddib666/kdb-vault-tools)
+
 Package that allow migrate from kdb to vault and vise versa
 
 ### Example
@@ -21,8 +23,8 @@ def create_kdb():
     }
 
     processor = Processor(vault_settings=vault_conf, kdb_settings=kdb_conf)
-    processor.sync_from_kdb()
-    processor.write_vault(base_path="/sandbox/org/team/foo/")
+    processor.sync_from_vault()
+    processor.write_kdb()
 
 
 def fill_vault():
@@ -44,12 +46,4 @@ Version 0.1.0 (2021-02-23) - Base Concept
 Lead Developer - Max Nikitenko (moaddib666@gmail.com)
 
 ### License
-The MIT License (MIT)
-
-Copyright (c) 2021 Max Nikitenko
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+- MIT

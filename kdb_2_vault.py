@@ -2,12 +2,14 @@ import argparse
 
 from kdb_vault_tools.processors import Processor
 
-parser = argparse.ArgumentParser(description='KDB to vault CLI')
-parser.add_argument('-i', '--input', help='Input *.kdbx file path', required=True)
-parser.add_argument('-p', '--password', help='kdb password', required=True)
-parser.add_argument('-u', '--url', help='vault url', required=True)
-parser.add_argument('-t', '--token', help='vault token', required=True)
-parser.add_argument('-b', '--base', help='vault base namespace', required=True)
+parser = argparse.ArgumentParser(description="KDB to vault CLI")
+parser.add_argument(
+    "-i", "--input", help="Input *.kdbx file path", required=True
+)
+parser.add_argument("-p", "--password", help="kdb password", required=True)
+parser.add_argument("-u", "--url", help="vault url", required=True)
+parser.add_argument("-t", "--token", help="vault token", required=True)
+parser.add_argument("-b", "--base", help="vault base namespace", required=True)
 
 
 def main(ns: argparse.Namespace):
@@ -19,7 +21,7 @@ def main(ns: argparse.Namespace):
     processor.write_vault(base_path=ns.base)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     """
     Namespace Example:
         base: '/sandbox/org/team/foo/'

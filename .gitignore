@@ -1,3 +1,4 @@
 .*kdbx
 build
 dist
+.pypirc
