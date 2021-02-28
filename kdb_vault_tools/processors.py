@@ -188,6 +188,7 @@ class VaultProcessor:
     def read_secret(self, path: str):
         try:
             resp_ = self.vault.secrets.kv.v2.read_secret_version(path=path)
+            logger.debug(f"Processing read secret {path}")
         except vault_errors.Forbidden as err:
             logger.debug(f"Failed to read secret {path} - {err}")
             return
@@ -196,6 +197,7 @@ class VaultProcessor:
         g_path, title = path_.rsplit("/", 1) if "/" in path_ else ["", path_]
 
         if title == self.__g_meta_label:
+            _, title = g_path.rsplit("/", 1) if "/" in g_path else ["", g_path]
             group = BaseGroup(title=title, path=g_path, **data)
             self.kdb_groups[g_path] = group
         else:
@@ -203,7 +205,7 @@ class VaultProcessor:
                 entry = BaseEntry(**data, path=path_, title=title)
                 self.kdb_entries.setdefault(g_path, []).append(
                     entry
-                )  # TOdO make method move to mixin
+                )  # TODO make method move to mixin
             except TypeError as err:
                 logger.info(
                     f"Secret configured improperly {err} {data} {path_} {title}"
@@ -219,7 +221,8 @@ class VaultProcessor:
                 path=path,
                 secret=data,
             )
-        except vault_errors.InvalidRequest as err:
+        except (vault_errors.InvalidRequest, vault_errors.InvalidPath) as err:
+            print("ERROR FUCK ", err)
             log_data = copy(data)
             log_data["password"] = "******"
             logger.exception(
@@ -261,6 +264,10 @@ class VaultProcessor:
     @property
     def vault(self) -> hvac.Client:
         return self.__tmd_vault
+
+    @property
+    def group_meta_label(self) -> str:
+        return self.__g_meta_label
 
 
 class Processor:
