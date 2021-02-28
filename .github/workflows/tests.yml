@@ -7,13 +7,35 @@ on:
   pull_request:
 
 jobs:
+  lint:
+    env:
+      package: kdb_vault_tools
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+    steps:
+      - name: Checkout Contrib Repo @ SHA - ${{ github.sha }}
+        uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - name: Installing tox
+        run: pip install -U tox
+      - name: Create tox cache
+        uses: actions/cache@v2
+        with:
+          path: .tox
+          key: tox-lint-cache-${{ env.runtime-label }}-${{ hashFiles('tox.ini') }}
+      - name: run tox
+        run: tox -e lint
   build:
     env:
       py37: 3.7
       py38: 3.8
       py39: 3.9
       package: kdb_vault_tools
-      runtime-label: ${{ matrix.python-version }}-test-${{ package }}
+      runtime-label: ${{ matrix.python-version }}test-kdb-vault-tools
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -35,5 +57,5 @@ jobs:
         with:
           path: .tox
           key: tox-cache-${{ env.runtime-label }}-${{ hashFiles('tox.ini') }}
-      - name: run tox -e ${{env.runtime-label}}
-        run: tox
+      - name: run tox
+        run: tox -e ${{env.runtime-label}}
