@@ -1,6 +1,6 @@
 # KDB to Vault Tools
 
-[![Coverage Status](https://coveralls.io/repos/github/moaddib666/kdb-vault-tools/badge.svg?branch=master)](https://coveralls.io/github/moaddib666/kdb-vault-tools?branch=master)
+[![codecov](https://codecov.io/gh/moaddib666/kdb-vault-tools/branch/master/graph/badge.svg?token=2P8a1JEjSn)](https://codecov.io/gh/moaddib666/kdb-vault-tools)
 
 Package that allow migrate from kdb to vault and vise versa
 
