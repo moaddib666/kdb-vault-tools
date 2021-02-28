@@ -59,9 +59,8 @@ jobs:
           key: tox-cache-${{ env.runtime-label }}-${{ hashFiles('tox.ini') }}
       - name: run tox
         run: tox -e ${{env.runtime-label}}
-
       - name: report coverage
-      - uses: codecov/codecov-action@v1
+        uses: codecov/codecov-action@v1
         with:
           flags: unittests # optional
           fail_ci_if_error: true # optional (default = false)
