@@ -1,8 +1,9 @@
+import io
 import logging
 import os
 import sys
 from copy import copy
-from typing import List, Type
+from typing import List, Type, Union
 
 import hvac
 from hvac import exceptions as vault_errors
@@ -31,8 +32,8 @@ class KDBProcessor:
     kdb_entries: dict
     kdb_groups: dict
 
-    __blank_kdb_file = "blank_database.kdbx"
-    __blank_kdb_file_password = "password"
+    _blank_kdb_file = "blank_database.kdbx"
+    _blank_kdb_file_password = "password"
     __tmd_kdb: PyKeePass
 
     def exception_handler(self, exception: Exception):
@@ -45,7 +46,7 @@ class KDBProcessor:
     def init_kdb_connection(self):
         pass
 
-    def load_from_kdb(self, filename: str, password: str):
+    def load_from_kdb(self, filename: Union[str, io.BytesIO], password: str):
         self.__tmd_kdb = PyKeePass(filename=filename, password=password)
         self._load_groups_from_kdb()
 
@@ -69,7 +70,7 @@ class KDBProcessor:
         for entry in entries:
             self._load_entry_from_kdb(entry)
 
-    def build_kdb(self, filename: str, password: str):
+    def build_kdb(self, filename: Union[str, io.BytesIO], password: str):
         self._build_from_blank(filename, password)
         self._save_groups_to_kdb()
         self._save_entries_to_kdb()
@@ -78,9 +79,9 @@ class KDBProcessor:
         self.kdb.save()
 
     def _build_from_blank(self, filename, password):
-        if self.__blank_kdb_file and os.path.isfile(self.__blank_kdb_file):
+        if self._blank_kdb_file and os.path.isfile(self._blank_kdb_file):
             kdb = PyKeePass(
-                self.__blank_kdb_file, self.__blank_kdb_file_password
+                self._blank_kdb_file, self._blank_kdb_file_password
             )
             kdb.filename = filename
             kdb.password = password
@@ -134,6 +135,7 @@ class KDBProcessor:
                 try:
                     group = self.kdb.find_groups(path=c_path, first=True)
                 except Exception as err:
+                    self.exception_handler(err)
                     raise EntryBuildError(
                         f"Fail while processing group {c_path} result: {group}"
                     ) from err

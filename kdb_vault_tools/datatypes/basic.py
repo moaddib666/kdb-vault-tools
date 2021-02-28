@@ -81,4 +81,4 @@ class BaseEntry:
 
     @property
     def group_path(self) -> str:
-        return os.path.join(*self.path.split("/")[:-1])
+        return self.path.replace(self.title, "").rstrip("/")
