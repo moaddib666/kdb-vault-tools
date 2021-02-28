@@ -245,7 +245,11 @@ class VaultProcessor:
             self.read_secret(path)
             return
 
-        resp_ = self.vault.secrets.kv.v2.list_secrets(path=path)
+        try:
+            resp_ = self.vault.secrets.kv.v2.list_secrets(path=path)
+        except vault_errors.InvalidPath:
+            logger.info(f"Trying access invalid vault path {path}")
+            return
 
         data = resp_.get("data")
         keys = data.get("keys")
