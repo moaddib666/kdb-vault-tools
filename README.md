@@ -1,5 +1,7 @@
 # KDB to Vault Tools
 
+[![Coverage Status](https://coveralls.io/repos/github/moaddib666/kdb-vault-tools/badge.svg?branch=master)](https://coveralls.io/github/moaddib666/kdb-vault-tools?branch=master)
+
 Package that allow migrate from kdb to vault and vise versa
 
 ### Example
